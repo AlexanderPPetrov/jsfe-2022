@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {useState, useEffect} from "react";
 import MovieList from "../components/movies/MovieList";
+import Filters from "../components/filters/Filters";
+import {Col} from "react-bootstrap";
 
 function Movies(props) {
     const [movies, setMovies] = useState([]);
@@ -17,9 +19,14 @@ function Movies(props) {
     }, []);
 
     return (
-        <div>
+        <>
+        <Col md={3} >
+            <Filters/>
+        </Col>
+        <Col>
             <MovieList movies={movies}/>
-        </div>
+        </Col>
+        </>
     )
 }
 export default Movies;
