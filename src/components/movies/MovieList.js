@@ -1,8 +1,11 @@
 import Movie from "./Movie";
+import {useMovie} from "../movies/MovieContext";
 
 function MovieList(props) {
+
+    const {movies} = useMovie();
     const renderMovies = () => {
-        return props.movies.map(movie => {
+        return movies.map(movie => {
             return <Movie 
                 key={movie.id}
                 title={movie.title}>

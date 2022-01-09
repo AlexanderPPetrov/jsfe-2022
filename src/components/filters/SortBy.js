@@ -1,7 +1,8 @@
 import {Form} from "react-bootstrap";
+import {useMovie} from "../movies/MovieContext";
 
 function SortBy(props) {
-    
+    const {selectedSortBy, setSelectedSortBy} = useMovie();
     const options = [
         {
             value: "popularity.desc",
@@ -32,7 +33,9 @@ function SortBy(props) {
             className="mb-3" 
             controlId="filterForm.ControlSelect1">
             <Form.Label>Подреди по</Form.Label>
-            <Form.Select>
+            <Form.Select
+                value={selectedSortBy}
+                onChange={e => setSelectedSortBy(e.target.value)}>
                 {getOptions()}
             </Form.Select>
         </Form.Group>

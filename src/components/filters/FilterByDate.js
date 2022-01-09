@@ -1,13 +1,12 @@
 import {Form} from "react-bootstrap";
-import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import {useMovie} from "../movies/MovieContext";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 function FilterByDate(props) {
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const {startDate, setStartDate, endDate, setEndDate} = useMovie();
 
     return (
         <Form.Group 
