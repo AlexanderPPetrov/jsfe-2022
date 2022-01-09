@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useState, useEffect} from "react";
-import {Alert} from "react-bootstrap";
+import MovieList from "../components/movies/MovieList";
 
 function Movies(props) {
     const [movies, setMovies] = useState([]);
@@ -16,20 +16,9 @@ function Movies(props) {
         fetchMovies();
     }, []);
 
-    const renderMovies = () => {
-        return movies.map(movie => {
-            return <Alert 
-                key={movie.id}
-                variant="info" 
-                className="d-flex align-items-center">
-                {movie.title}
-            </Alert>
-        })
-    }
-
     return (
         <div>
-            {renderMovies()}
+            <MovieList movies={movies}/>
         </div>
     )
 }

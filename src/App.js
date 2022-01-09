@@ -17,7 +17,7 @@ const routes = [
     exact: true,
   },
   {
-    path: 'movies',
+    path: '/movies',
     component: <Movies/>,
   },
   {
