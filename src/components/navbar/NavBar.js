@@ -1,9 +1,16 @@
 import {Navbar, Container, Nav} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
+import { useTheme } from "../../ThemeContext";
+import ToggleTheme from "./ToggleTheme";
 
 function NavBar () {
+
+    const [theme] = useTheme();
+
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg={theme ? 'light' : 'dark'}
+                variant={theme ? 'light' : 'dark'}
+                expand="lg">
         <Container>
             <Navbar.Brand href="#home">Master Course 2022</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -19,6 +26,7 @@ function NavBar () {
                     <Nav.Link href="/tvseries">TV Series</Nav.Link>
                 </LinkContainer>
             </Nav>
+            <ToggleTheme/>
             </Navbar.Collapse>
         </Container>
         </Navbar>

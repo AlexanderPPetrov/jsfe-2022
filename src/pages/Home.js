@@ -13,6 +13,11 @@ function Home() {
         <Col md={4}>
           <FunctionalComponent>
             <div>....</div>
+            <span></span>
+            <p></p>
+          </FunctionalComponent>
+          <FunctionalComponent>
+            <p>....</p>
           </FunctionalComponent>
         </Col>
   </>
