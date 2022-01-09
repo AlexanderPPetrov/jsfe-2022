@@ -3,6 +3,7 @@ import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import TVSeries from "./pages/TVSeries";
+import {ThemeProvider} from "./ThemeContext";
 
 import {
   BrowserRouter as Router,
@@ -17,7 +18,7 @@ const routes = [
     exact: true,
   },
   {
-    path: 'movies',
+    path: '/movies',
     component: <Movies/>,
   },
   {
@@ -40,16 +41,18 @@ function App() {
   }
 
   return (
-    <Router>
-      <NavBar/>
-      <Container>
-        <Row className="mt-5">
-          <Routes>
-            {getRoutes()}
-          </Routes>
-        </Row>
-      </Container>
-  </Router>
+    <ThemeProvider>
+      <Router>
+        <NavBar/>
+        <Container>
+          <Row className="mt-5">
+            <Routes>
+              {getRoutes()}
+            </Routes>
+          </Row>
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
 }
 
