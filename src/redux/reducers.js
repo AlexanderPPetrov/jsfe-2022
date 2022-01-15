@@ -19,4 +19,19 @@ export function movies(state = [], action) {
     }
 }
 
-export default combineReducers({ listView, movies })
+export function favoriteMovies(state = [], action) {
+    switch (action.type) {
+        case actionTypes.ADD_FAVORITE_MOVIE: 
+            return [...state, action.payload];
+        case actionTypes.REMOVE_FAVORITE_MOVIE:
+            return state.filter(movie => action.payload.id !== movie.id);
+        default:
+            return state
+    }
+}
+
+export default combineReducers({ 
+    listView, 
+    movies,
+    favoriteMovies, 
+})

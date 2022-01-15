@@ -16,6 +16,20 @@ export function setMovies(value) {
     }
 }
 
+export function addFavoriteMovie(movie) {
+    return {
+        type: actionTypes.ADD_FAVORITE_MOVIE,
+        payload: movie,
+    }
+}
+
+export function removeFavoriteMovie(movie) {
+    return {
+        type: actionTypes.REMOVE_FAVORITE_MOVIE,
+        payload: movie,
+    }
+}
+
 export function getMovies(path, params) {
     return async (dispatch) => {
         try {

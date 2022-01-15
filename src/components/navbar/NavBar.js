@@ -25,6 +25,9 @@ function NavBar () {
                 <LinkContainer to="/tvseries">
                     <Nav.Link href="/tvseries">TV Series</Nav.Link>
                 </LinkContainer>
+                <LinkContainer to="/favorites">
+                    <Nav.Link href="/favorites">Favorite Movies</Nav.Link>
+                </LinkContainer>
             </Nav>
             <ToggleTheme/>
             </Navbar.Collapse>

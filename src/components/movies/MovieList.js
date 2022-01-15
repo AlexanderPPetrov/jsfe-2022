@@ -6,8 +6,13 @@ import { faThList, faGripHorizontal } from '@fortawesome/free-solid-svg-icons';
 import MovieGridItem from "./MovieGridItem";
 import { useSelector, useDispatch } from 'react-redux';
 import { setListView } from "../../redux/actions";
+import { selectAverageRating } from "../../redux/selectors";
 
 function MovieList(props) {
+
+    const rootState = useSelector(state => state);
+
+    const average = selectAverageRating(rootState)
 
     const listView = useSelector((state) => state.listView);
     const dispatch = useDispatch();
@@ -16,7 +21,7 @@ function MovieList(props) {
 
     const renderMovies = () => {
         if(!movies.length) {
-            return <NoResults/>
+            return <NoResults title={'Няма намерени резултати'}/>
         }
         return listView ? getMovieListItems() : getMovieGridItems();
     }
@@ -25,11 +30,7 @@ function MovieList(props) {
         return movies.map(movie => {
             return <MovieListItem 
                 key={movie.id}
-                title={movie.title}
-                releaseDate={movie.release_date}
-                overview={movie.overview}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
+                movie={movie}
                 >
             </MovieListItem>
         })
@@ -39,11 +40,7 @@ function MovieList(props) {
         return movies.map(movie => {
             return <MovieGridItem 
                 key={movie.id}
-                title={movie.title}
-                releaseDate={movie.release_date}
-                overview={movie.overview}
-                poster={movie.poster_path}
-                rating={movie.vote_average}
+                movie={movie}
                 >
             </MovieGridItem>
         })
@@ -54,6 +51,9 @@ function MovieList(props) {
             <Card.Body>
                 <div className="d-flex justify-content-between align-items-center mb-2">
                     <Card.Title>Резултат</Card.Title>
+                    <div className="vote-average">
+                        {average}
+                    </div>
                     <ButtonGroup aria-label="List switch">
                         <Button variant={listView ? 'primary': 'outline-primary'}
                             onClick={()=> dispatch(setListView(true))}>

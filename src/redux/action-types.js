@@ -1,6 +1,8 @@
 const actionTypes = {
     SET_LIST_VIEW: 'SET_LIST_VIEW',
     SET_MOVIES: 'SET_MOVIES',
+    ADD_FAVORITE_MOVIE: 'ADD_FAVORITE_MOVIE',
+    REMOVE_FAVORITE_MOVIE: 'REMOVE_FAVORITE_MOVIE',
 }
 
 export default actionTypes;
