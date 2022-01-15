@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from 'axios';
+import constants from '../../constants';
+import moment from "moment";
 
 const MovieContext = React.createContext();
 
@@ -9,20 +11,25 @@ export function useMovie() {
 export function MovieProvider(props) {
 
     const [selectedSortBy, setSelectedSortBy] = useState("popularity.desc");
-
-    const [startDate, setStartDate] = useState(new Date());
+    const startFrom = moment().subtract(1, 'years').toDate();
+    const [startDate, setStartDate] = useState(startFrom);
     const [endDate, setEndDate] = useState(new Date());
     
     const [checkedState, setCheckedState] = useState(
         new Array(4).fill(false)
     );
 
+    const [listView, setListView] = useState(true);
+
+
     const [movies, setMovies] = useState([]);
 
-    const fetchMovies = () => {
-        axios.get('https://reactnative.dev/movies.json')
+    const fetchMovies = (path, params) => {
+        axios.get(`${constants.baseUrl}${path}` , {
+            params: {...params, api_key: constants.apiKey}
+        })
         .then(response => {
-            setMovies(response.data.movies);
+            setMovies(response.data.results);
         })
     }
 
@@ -39,6 +46,8 @@ export function MovieProvider(props) {
                 movies,
                 setMovies,
                 fetchMovies,
+                listView,
+                setListView,
             }}>
             {props.children}
         </MovieContext.Provider>
