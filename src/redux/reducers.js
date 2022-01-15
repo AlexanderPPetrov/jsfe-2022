@@ -25,6 +25,8 @@ export function favoriteMovies(state = [], action) {
             return [...state, action.payload];
         case actionTypes.REMOVE_FAVORITE_MOVIE:
             return state.filter(movie => action.payload.id !== movie.id);
+        case actionTypes.SET_FAVORITE_MOVIES:
+            return [...action.payload];
         default:
             return state
     }

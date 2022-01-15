@@ -1,10 +1,11 @@
-import {Card, Row} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import {Card, Row, Button} from "react-bootstrap";
+import {useSelector, useDispatch} from "react-redux";
 import NoResults from "./NoResults";
 import MovieGridItem from "./MovieGridItem";
+import {setFavoriteMovies} from "../../redux/actions";
 
 function FavoriteList(props) {
-
+    const dispatch = useDispatch();
     const favoriteMovies = useSelector(state => state.favoriteMovies);
     
     function renderFavoriteMovies() {
@@ -16,10 +17,17 @@ function FavoriteList(props) {
         })
     }
 
+    function clearAllFavorites() {
+        dispatch(setFavoriteMovies([]))
+    }
+
     return (
         <Card>
             <Card.Body>
                 Favorite list
+                <Button 
+                    onClick={() => clearAllFavorites()}
+                variant="link">Clear all</Button>
                 <Row>
                     {renderFavoriteMovies()}
                 </Row>
