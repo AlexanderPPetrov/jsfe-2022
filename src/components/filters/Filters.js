@@ -5,6 +5,8 @@ import Genres from "./Genres";
 import {useMovie} from "../movies/MovieContext";
 import {useEffect} from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { getMovies } from "../../redux/actions";
 
 const checkboxes = [
     {
@@ -32,30 +34,31 @@ const checkboxes = [
 
 function Filters(props) {
     
+    const dispatch = useDispatch();
+
     const {
         selectedSortBy,
         startDate,
         endDate,
         checkedState,
-        fetchMovies,
     } = useMovie();
 
     useEffect(() => {
-        getMovies();
+        fetchMovies();
     }, []);
 
     function filtersOnSubmit(e) {
         e.preventDefault();
-        getMovies();
+        fetchMovies();
     }
 
-    function getMovies() {
-        fetchMovies('discover/movie', {
+    function fetchMovies() {
+        dispatch(getMovies('discover/movie', {
             "release_date.gte": getDate(startDate),
             "release_date.lte": getDate(endDate),
             "with_genres": getCheckedOptions(),
             "sort_by": selectedSortBy,
-        });
+        }))
     }
 
     function getDate(date) {

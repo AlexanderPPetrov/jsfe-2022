@@ -1,14 +1,18 @@
 import MovieListItem from "./MovieListItem";
-import {useMovie} from "../movies/MovieContext";
 import NoResults from "./NoResults";
 import {Card, ButtonGroup, Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThList, faGripHorizontal } from '@fortawesome/free-solid-svg-icons';
 import MovieGridItem from "./MovieGridItem";
+import { useSelector, useDispatch } from 'react-redux';
+import { setListView } from "../../redux/actions";
 
 function MovieList(props) {
 
-    const {movies, listView, setListView} = useMovie();
+    const listView = useSelector((state) => state.listView);
+    const dispatch = useDispatch();
+
+    const movies = useSelector((state) => state.movies);
 
     const renderMovies = () => {
         if(!movies.length) {
@@ -52,11 +56,11 @@ function MovieList(props) {
                     <Card.Title>Резултат</Card.Title>
                     <ButtonGroup aria-label="List switch">
                         <Button variant={listView ? 'primary': 'outline-primary'}
-                            onClick={()=> setListView(true)}>
+                            onClick={()=> dispatch(setListView(true))}>
                             <FontAwesomeIcon icon={faThList}/>
                         </Button>
                         <Button variant={listView ? 'outline-primary': 'primary'}
-                            onClick={()=> setListView(false)}>
+                            onClick={()=> dispatch(setListView(false))}>
                             <FontAwesomeIcon icon={faGripHorizontal}/>
                         </Button>
                     </ButtonGroup>
