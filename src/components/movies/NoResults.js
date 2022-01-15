@@ -1,9 +1,9 @@
 import {Alert} from "react-bootstrap";
 
-function NoResults() {
+function NoResults({title}) {
     return (
         <Alert variant="info" className="p-5 text-center">
-            Няма намерени резултати
+            {title}
         </Alert>
     )
 }
