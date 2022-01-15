@@ -41,33 +41,35 @@ function Filters(props) {
     } = useMovie();
 
     useEffect(() => {
-        fetchMovies();
-    }, [fetchMovies]);
+        getMovies();
+    }, []);
 
     function filtersOnSubmit(e) {
         e.preventDefault();
-        console.log(selectedSortBy)
-        console.log(getDateRange())
-        const options = getCheckedOptions();
-        console.log(options);
+        getMovies();
     }
 
-    function getDateRange() {
-        const dateFrom = moment(startDate).format('YYYY-MM-DD');
-        const dateTo = moment(endDate).format('YYYY-MM-DD');
-        return {
-            'release_date.gte': dateFrom,
-            'release_date.lte': dateTo,
-        }
+    function getMovies() {
+        fetchMovies('discover/movie', {
+            "release_date.gte": getDate(startDate),
+            "release_date.lte": getDate(endDate),
+            "with_genres": getCheckedOptions(),
+            "sort_by": selectedSortBy,
+        });
+    }
+
+    function getDate(date) {
+        return moment(date).format('YYYY-MM-DD');
     }
 
     function getCheckedOptions() {
-        return checkedState.reduce((acc, curr, index) => {
+        const checkedOptions = checkedState.reduce((acc, curr, index) => {
             if(curr){
                 return [...acc, checkboxes[index].value]
             }
             return acc
         }, [])
+        return checkedOptions.toString();
     }
 
     return (
